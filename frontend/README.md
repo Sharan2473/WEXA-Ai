@@ -45,3 +45,14 @@ To run this application, you will need to start both the Java Spring Boot backen
         npm run dev
 
     4. Open your web browser and navigate to http://localhost:5173 to view the application!
+
+## 2. Data Model Diagram
+The data model is deliberately straightforward to highlight the multi-hop traversal capability.
+
+```text
+  [ Node: Movie ]                             [ Node: Genre ]
+ -------------------                         -----------------
+  + id (String)                               + name (String)
+  + title (String)          -[:IN_GENRE]->   
+  + plot (String)
+  + posterUrl (String)
