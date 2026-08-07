@@ -3,6 +3,8 @@ import SearchBar from './components/SearchBar';
 import MovieCard from './components/MovieCard';
 import MovieModal from './components/MovieModal';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function App() {
   const [movies, setMovies] = useState([]); // Start with an empty array
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +23,7 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:8080/api/movies');
+      const response = await fetch(`${API_BASE_URL}/api/movies`);
       if (!response.ok) throw new Error("Failed to fetch");
       const data = await response.json();
       setMovies(data);
@@ -47,7 +49,7 @@ function App() {
       // Hit our backend API with the genre query parameter
       // Note: We are using 'genre' here based on your backend setup. 
       // If your search bar was intended for titles, we would need a new endpoint!
-      const response = await fetch(`http://localhost:8080/api/movies?search=${searchTerm}`);
+      const response = await fetch(`${API_BASE_URL}/api/movies?search=${searchTerm}`);
       
       if (!response.ok) {
         throw new Error('Network response was not ok');

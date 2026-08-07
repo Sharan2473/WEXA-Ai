@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function MovieModal({ movie, onClose, onMovieSelect }) {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -10,7 +12,7 @@ function MovieModal({ movie, onClose, onMovieSelect }) {
     const fetchSimilarMovies = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:8080/api/movies/${movie.id}/similar`);
+        const response = await fetch(`${API_BASE_URL}/api/movies/${movie.id}/similar`);
         if (response.ok) {
           const data = await response.json();
           setSimilarMovies(data);
