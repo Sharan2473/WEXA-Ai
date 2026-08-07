@@ -3,9 +3,9 @@ FROM maven:3.9-eclipse-temurin-17-alpine AS build
 WORKDIR /app
 
 # Copy pom.xml and src
-# Paths are relative to the Docker build context (repo root)
-COPY backend/movie-explorer-api/movie-explorer-api/pom.xml .
-COPY backend/movie-explorer-api/movie-explorer-api/src ./src
+# Paths are relative to Render's build context (Root Directory = backend/)
+COPY movie-explorer-api/movie-explorer-api/pom.xml .
+COPY movie-explorer-api/movie-explorer-api/src ./src
 
 # Build the JAR file
 RUN mvn clean package -DskipTests

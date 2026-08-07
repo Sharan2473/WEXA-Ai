@@ -2,10 +2,9 @@ services:
   - type: web
     name: movie-explorer-api
     runtime: docker
-    dockerfilePath: ./backend/movie-explorer-api/movie-explorer-api/Dockerfile
-    # Build context is the repo root (default), so COPY paths in the
-    # Dockerfile must be relative to the repo root.
-    dockerContext: .
+    # Paths below are relative to the Root Directory (backend/) set in Render dashboard
+    dockerfilePath: ./movie-explorer-api/movie-explorer-api/Dockerfile
+    dockerContext: ./movie-explorer-api/movie-explorer-api
     port: 8080
     envVars:
       - key: PORT
