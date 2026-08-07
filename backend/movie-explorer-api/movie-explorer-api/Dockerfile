@@ -1,5 +1,5 @@
 # Stage 1: Build using Maven
-FROM maven:3.9-eclipse-temurin-17-alpine AS build
+FROM maven:3.9-eclipse-temurin-21-alpine AS build
 WORKDIR /app
 
 # Copy pom.xml and src
@@ -11,7 +11,7 @@ COPY movie-explorer-api/movie-explorer-api/src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Create runtime image (JRE for a leaner image)
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
