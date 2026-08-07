@@ -2,9 +2,9 @@
 FROM maven:3.9-eclipse-temurin-17-alpine AS build
 WORKDIR /app
 
-# Copy pom.xml and src from the nested directory
-COPY backend/movie-explorer-api/movie-explorer-api/pom.xml .
-COPY backend/movie-explorer-api/movie-explorer-api/src ./src
+# Copy pom.xml and src
+COPY pom.xml .
+COPY src ./src
 
 # Build the JAR file
 RUN mvn clean package -DskipTests
