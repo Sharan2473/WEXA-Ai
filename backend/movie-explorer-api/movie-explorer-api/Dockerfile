@@ -1,10 +1,15 @@
-# Stage 1: Build the application using an image with Maven pre-installed
+# Stage 1: Build using Maven
 FROM maven:3.9-eclipse-temurin-17-alpine AS build
 WORKDIR /app
-COPY . .
+
+# Copy pom.xml and src from the nested directory
+COPY backend/movie-explorer-api/movie-explorer-api/pom.xml .
+COPY backend/movie-explorer-api/movie-explorer-api/src ./src
+
+# Build the JAR file
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the application using a lightweight JDK runtime
+# Stage 2: Create runtime image
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
